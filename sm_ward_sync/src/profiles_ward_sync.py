@@ -31,14 +31,16 @@ def updateProfile(profile):
 
     if ward:
         # update profile model
-        profile.ward_id = ward.id
-        profile.ward = ward.ward_translations[0].title
-        profile.city_id = ward.city_id
-        profile.city = ward.city.title
-        profile.district_id = ward.city.district_id
-        profile.district = ward.city.district_title
-        profile.state_id = ward.city.state_id
-        profile.state = ward.city.state_title
+        profile.mapped_ward_id = ward.id
+        profile.mapped_ward_number = ward.ward_number
+        profile.mapped_ward = ward.ward_translations[0].title
+        profile.mapped_city_id = ward.city_id
+        profile.mapped_city = ward.city.title
+        profile.mapped_district_id = ward.city.district_id
+        profile.mapped_district = ward.city.district_title
+        profile.mapped_state_id = ward.city.state_id
+        profile.mapped_state = ward.city.state_title
+        profile.ward_not_in_sync = True
         profile.save()
 
     return profile

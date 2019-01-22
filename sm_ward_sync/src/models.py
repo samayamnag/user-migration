@@ -47,12 +47,10 @@ class Ward(Base):
     deleted_at = Column(DateTime)
 
 class WardTranslation(Base):
-    __tablename__ = "ward_translations"
+    __tablename__ = "sbm_ward_translations"
 
     id = Column(Integer, primary_key=True)
     ward_id = Column(Integer, ForeignKey('wards_not_sync.id'), index=True,)
     ward = relationship("Ward", back_populates="ward_translations")
     locale = Column(String(2), default="en")
     title = Column(String(255))
-
-

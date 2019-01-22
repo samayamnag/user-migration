@@ -47,6 +47,16 @@ class Profile(Document):
     state = StringField()
     district_id = IntField()
     district = StringField()
+    mapped_city_id = IntField()
+    mapped_ward_id = IntField()
+    mapped_ward_number = StringField()
+    mapped_city = StringField()
+    mapped_ward = StringField()
+    mapped_state_id = IntField()
+    mapped_state = StringField()
+    mapped_district_id = IntField()
+    mapped_district = StringField()
+    ward_not_in_sync = BooleanField(default=False, index=True)
 
     meta = {'collection': 'profiles'}
 
