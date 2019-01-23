@@ -18,7 +18,9 @@ def fetchProfiles(fromUserId, toUserId):
     return Profile.objects(
         user_id__gte=fromUserId,
         user_id__lte=toUserId,
-        ward_id__gte=253
+        ward_id__in=[],
+        ward_id__ne=300,
+        city_id__nin=[None, 4500],
     )
 
 def updateProfile(profile):
@@ -30,6 +32,10 @@ def updateProfile(profile):
             first()
 
     if ward:
+        if profile.channels:
+            if type(profile.channels) is not list:
+                profile.channels = [profile.channels]
+                profile.save()
         # update profile model
         profile.mapped_ward_id = ward.id
         profile.mapped_ward_number = ward.ward_number
@@ -42,6 +48,9 @@ def updateProfile(profile):
         profile.mapped_state = ward.city.state_title
         profile.ward_not_in_sync = True
         profile.save()
+    
+    # Close session
+    session.close()
 
     return profile
 
@@ -63,3 +72,4 @@ if __name__ == "__main__":
             print("Input should be positive integer")
     except ValueError:
         print("Input should be an integer")
+
